@@ -2,6 +2,7 @@
 <components xmlns="http://jboss.com/products/seam/components"
 	xmlns:web="http://jboss.com/products/seam/web"
 	xmlns:security="http://jboss.com/products/seam/security"
+	xmlns:persistence="http://jboss.com/products/seam/persistence"
 	xmlns:core="http://jboss.com/products/seam/core"
 	xmlns:transaction="http://jboss.com/products/seam/transaction"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -9,17 +10,22 @@
 		"http://jboss.com/products/seam/core http://jboss.com/products/seam/core-2.1.xsd 
 		http://jboss.com/products/seam/transaction http://jboss.com/products/seam/transaction-2.1.xsd 
 		http://jboss.com/products/seam/security http://jboss.com/products/seam/security-2.1.xsd
+		http://jboss.com/products/seam/persistence http://jboss.com/products/seam/persistence-2.0.xsd
 		http://jboss.com/products/seam/components http://jboss.com/products/seam/components-2.1.xsd"
 	>
 
 	<web:exception-filter url-pattern="*.seam"/>
 	<web:redirect-filter url-pattern="*.seam"/>
 
-	<core:init debug="true" transaction-management-enabled="false"/>
+	<transaction:entity-transaction entity-manager="#{em}"/>
+	<persistence:entity-manager-factory name="testDatabase"/>
+	<persistence:managed-persistence-context name="em" auto-create="true"
+		entity-manager-factory="#{testDatabase}"/>
+
+	<security:identity authenticate-method="#{authenticator.authenticate}"/>
 
 	<core:manager concurrent-request-timeout="500"
 		conversation-timeout="120000" 
 		conversation-id-parameter="c"/>
-	<transaction:no-transaction/>
 
 </components>

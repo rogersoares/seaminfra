@@ -7,5 +7,10 @@
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/annotations-api.jar"/>
 	<classpathentry kind="src" path="WEB-INF/src"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/hibernate-validator.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jboss-seam.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/persistence-api.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>

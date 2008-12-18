@@ -4,4 +4,7 @@
 		xmlns:s="http://jboss.com/products/seam/taglib"
 		style="width:100px; border:1px solid blue">
 menu
+<h:form id="logoutForm" rendered="#{identity.loggedIn}">
+	<h:commandLink id="logout" action="#{identity.logout}">Logout</h:commandLink>
+</h:form>
 </div>

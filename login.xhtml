@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:c="http://java.sun.com/jstl/core"
+		xmlns:s="http://jboss.com/products/seam/taglib"
+		xmlns:rich="http://richfaces.org/rich"
+		xmlns:a="http://richfaces.org/a4j"
+		template="/WEB-INF/facelets/layout/mainlayout.xhtml">
+
+<ui:define name="title">Login</ui:define>
+
+<ui:define name="body">
+
+<h:messages/>
+<h:form>
+	<s:validateAll>
+	<p>username: <h:inputText value="#{identity.username}" required="true"/></p>
+	<p>password: <h:inputSecret value="#{identity.password}" required="true"/></p>
+	</s:validateAll>
+	<h:commandButton value="Login" action="#{identity.login}"/>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
