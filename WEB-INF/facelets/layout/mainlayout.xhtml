@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:s="http://jboss.com/products/seam/taglib"
+		xmlns:a="http://richfaces.org/a4j">
+<f:view contentType="text/html"/>
+<head>
+<title><ui:insert name="title"/></title>
+</head>
+
+<body>
+<ui:insert name="header"><ui:include src="/WEB-INF/facelets/layout/header.xhtml"/></ui:insert>
+<table border="1" width="100%"><tr>
+<td width="100">
+<ui:insert name="menu"><ui:include src="/WEB-INF/facelets/layout/menu.xhtml"/></ui:insert>
+</td>
+<td>
+<ui:insert name="body"/>
+</td>
+</tr></table>
+<ui:insert name="footer"><ui:include src="/WEB-INF/facelets/layout/footer.xhtml"/></ui:insert>
+</body>
+</html>
