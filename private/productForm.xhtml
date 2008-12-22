@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:c="http://java.sun.com/jstl/core"
+		xmlns:s="http://jboss.com/products/seam/taglib"
+		xmlns:rich="http://richfaces.org/rich"
+		xmlns:a="http://richfaces.org/a4j"
+		template="/WEB-INF/facelets/layout/mainlayout.xhtml">
+
+<ui:define name="title">#{messages["title.productForm"]}</ui:define>
+
+<ui:define name="body">
+
+<s:remote include="ajaxtest"/>
+<script type="text/javascript">
+Seam.Remoting.displayLoadingMessage = function() {};
+Seam.Remoting.hideLoadingMessage = function() {};
+
+var manager = Seam.Component.getInstance("ajaxtest");
+
+function checkDesc () {
+	var e = document.getElementById("productForm:ddesc:description");
+	manager.checkDesc(e.value, checkDescCallback);
+}
+
+function checkDescCallback(result) {
+	if (result) {
+		hideCheckDescWarn();
+	} else {
+		showCheckDescWarn();
+	}
+}
+
+function showCheckDescWarn() {
+	var e = document.getElementById("descWarning");
+	if (!(e === null)) {
+		e.style.visibility = "inherit";
+		e.style.display = "";
+	}
+}
+
+function hideCheckDescWarn() {
+	var e = document.getElementById("descWarning");
+	if (!(e === null)) {
+		e.style.visibility = "hidden";
+		e.style.display = "none";
+	}
+}
+</script>
+
+<rich:tabPanel switchType="client">
+
+	<rich:tab label="input form">
+	<h:form id="productForm">
+
+	<h:messages style="background-color:#ffaaaa" globalOnly="true"/>
+	<h:inputHidden value="#{productAction.id}" />
+	<input type="hidden" name="id" value="#{productAction.id}"/>
+
+	<s:validateAll>
+	<table style="border:1px solid black">
+	<tr>
+		<td>
+			<h:outputLabel for="name">Name:</h:outputLabel>
+		</td>
+		<td>
+			<a:outputPanel id="opname">
+			<s:decorate id="dname">
+			<h:inputText id="name" value="#{productAction.product.name}" required="true" onkeyup="checkName(document.getElementById('productForm:dname:name').value)">
+				<a:support event="onblur" reRender="opname"/>
+			</h:inputText>
+			</s:decorate>
+			</a:outputPanel>
+			<h:outputText id="txt" value="#{ajaxtest.checkProductName()}" style="color:orange" escape="false"/>
+		</td>
+
+	</tr>
+	<tr>
+		<td>
+			<h:outputLabel>Description:</h:outputLabel>
+		</td>
+		<td>
+			<s:decorate id="ddesc">
+			<h:inputTextarea id="description" value="#{productAction.product.description}" cols="50" rows="5" required="true">
+				<a:support event="onblur" reRender="ddesc" onsubmit="checkDesc()"/>
+			</h:inputTextarea>
+			</s:decorate>
+			<span id="descWarning" style="display:none; color:orange">
+				Warning: The description already exists in the database!
+			</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<h:outputLabel>Type:</h:outputLabel>
+		</td>
+		<td>
+			<s:decorate id="dtype">
+			<h:selectOneMenu id="type" value="#{productAction.product.type.id}" required="true">
+				<f:selectItems value="#{productType.getTypes()}"/>
+				<a:support event="onchange" reRender="dtype"/>
+				<a:support event="onkeyup" reRender="dtype"/>
+			</h:selectOneMenu>
+			</s:decorate>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<h:commandButton id="submit" value="#{messages['global.save']}" action="#{productAction.save}"/>
+			&#160;
+			<s:button id="cancel" value="#{messages['global.cancel']}" view="/private/productList.xhtml"/>
+		</td>
+	</tr>
+	</table>
+	</s:validateAll>
+	</h:form>
+	</rich:tab>
+
+	<rich:tab label="help">
+	bla bla bla<br/>
+	ble ble ble<br/>
+	</rich:tab>
+
+</rich:tabPanel>
+
+<a:form>
+	<a:jsFunction name="checkName" reRender="txt" ignoreDupResponses="true">
+		<a:actionparam name="param1" assignTo="#{ajaxtest.name}" />
+	</a:jsFunction>
+</a:form>
+
+</ui:define>
+
+</ui:composition>

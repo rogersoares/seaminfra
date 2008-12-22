@@ -1,14 +1,18 @@
 package test.biz;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-public class Profile implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+@Table(name="producttype")
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
+@BatchSize(size=200)
+public class ProductType {
 
 	private int id;
 	private String description;

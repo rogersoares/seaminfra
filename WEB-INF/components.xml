@@ -27,5 +27,6 @@
 	<core:manager concurrent-request-timeout="500"
 		conversation-timeout="120000" 
 		conversation-id-parameter="c"/>
+	<core:manager default-flush-mode="MANUAL"/>
 
 </components>

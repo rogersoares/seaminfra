@@ -12,5 +12,8 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/hibernate-validator.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/jboss-seam.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/persistence-api.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jsf-api.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jta.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jboss-seam-remoting.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>

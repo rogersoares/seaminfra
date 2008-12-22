@@ -7,6 +7,15 @@
 		xmlns:s="http://jboss.com/products/seam/taglib"
 		xmlns:a="http://richfaces.org/a4j">
 <f:view contentType="text/html"/>
+<f:facet name="afterInvalidField">
+	<s:span style="color:red">
+		&#160;*&#160;
+		<s:message/>
+	</s:span>
+</f:facet>
+<f:facet name="aroundInvalidField">
+	<s:div style="border:1px solid red; background-color:#ffdddd; padding:3px"/>
+</f:facet>
 <head>
 <title><ui:insert name="title"/></title>
 </head>

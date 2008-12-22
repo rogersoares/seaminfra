@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:s="http://jboss.com/products/seam/taglib"
+		xmlns:a="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich"
+		template="/WEB-INF/facelets/layout/mainlayout.xhtml">
+
+<ui:define name="title">#{messages["title.productList"]}</ui:define>
+
+<ui:define name="body">
+
+	<h:messages style="background-color:#ffaaaa"/>
+
+	<s:link view="/private/productForm.xhtml" value="#{messages['global.add']}"/>
+	<table border="1">
+		<tr>
+			<td><b>#{messages["product.id"]}</b></td>
+			<td><b>#{messages["product.name"]}</b></td>
+			<td><b>#{messages["product.type"]}</b></td>
+			<td></td>
+		</tr>
+		<ui:repeat value="#{productAction.productList}" var="product">
+		<tr>
+			<td><h:outputText value="#{product.id}"/></td>
+			<td><h:outputText value="#{product.name}"/></td>
+			<td><h:outputText value="#{product.type.description}"/></td>
+			<td align="center">
+				<s:link view="/private/productForm.xhtml" value="#{messages['global.edit']}">
+					<f:param name="id" value="#{product.id}"/>
+				</s:link>
+				<h:outputText value=" "/>
+				<s:link action="#{productAction.delete()}" value="#{messages['global.delete']}">
+					<f:param name="id" value="#{product.id}"/>
+				</s:link>
+			</td>
+		</tr>
+		</ui:repeat>
+	</table>
+
+</ui:define>
+
+</ui:composition>
