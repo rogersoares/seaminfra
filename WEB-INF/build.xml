@@ -1,0 +1,62 @@
+<project basedir="." name="seaminfra">
+	<property name="deploy.dir" value="/tmp"/>
+	<property name="root" value=".."/>
+	<property name="build" value="build"/>
+	<property name="build.compile" value="build/seaminfra"/>
+
+	<path id="build.classpath">
+		<fileset dir="lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<target name="cleanAll" description="Deletes the build dir.">
+		<delete dir="build"/>
+	</target>
+
+	<target name="compile" description="Compiles webapp.">
+		<mkdir dir="${build.compile}"/>
+		<copy todir="${build.compile}">
+			<fileset dir="${root}">
+				<include name="**/*"/>
+				<exclude name="WEB-INF/build.xml"/>
+				<exclude name="WEB-INF/src/**"/>
+				<exclude name="WEB-INF/classes/**"/>
+				<exclude name="WEB-INF/test/**"/>
+				<exclude name="WEB-INF/build/**"/>
+				<exclude name="work"/>
+				<exclude name=".classpath"/>
+				<exclude name=".project"/>
+				<exclude name=".settings"/>
+			</fileset>
+		</copy>
+
+		<mkdir dir="${build.compile}/WEB-INF/classes"/>
+
+		<javac srcdir="src/"
+		destdir="${build.compile}/WEB-INF/classes/"
+		debug="true"
+		debuglevel="lines,vars,source"
+		includes="**/*.java"
+		classpathref="build.classpath"/>
+
+		<copy todir="${build.compile}/WEB-INF/classes" >
+			<fileset dir="src/" >
+				<include name="**/*.properties"/>
+				<include name="**/*.xml"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="generateWAR" depends="compile" description="Generates WAR file">
+		<jar destfile="${build}/seaminfra.war">
+			<zipfileset dir="${build.compile}"/>
+		</jar>
+	</target>
+
+	<target name="deploy" depends="generateWAR" description="Deploys WAR file">
+		<echo message="Deploy dir: ${deploy.dir}"/>
+		<copy file="${build}/seaminfra.war" todir="${deploy.dir}"/>
+	</target>
+
+</project>
