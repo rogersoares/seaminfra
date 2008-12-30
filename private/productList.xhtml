@@ -1,5 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:c="http://java.sun.com/jstl/core"
 		xmlns:h="http://java.sun.com/jsf/html"
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:s="http://jboss.com/products/seam/taglib"
@@ -12,6 +13,10 @@
 <ui:define name="body">
 
 	<h:messages style="background-color:#ffaaaa"/>
+
+	<c:if test="#{productAction.product.name != null}">
+		#{productAction.product.name} edited.<br/><br/>
+	</c:if>
 
 	<s:link view="/private/productForm.xhtml" value="#{messages['global.add']}"/>
 	<table border="1">

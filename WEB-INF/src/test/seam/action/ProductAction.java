@@ -19,7 +19,7 @@ import test.biz.Product;
 import test.biz.ProductType;
 
 @Name("productAction")
-@Scope(ScopeType.EVENT)
+@Scope(ScopeType.CONVERSATION)
 public class ProductAction {
 
 	@Logger
