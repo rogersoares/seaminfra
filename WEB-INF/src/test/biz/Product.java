@@ -26,7 +26,7 @@ public class Product {
 	private String description;
 	private ProductType type;
 
-	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_STORE")
+	@Id @GeneratedValue(strategy=GenerationType.AUTO, generator="SEQ_STORE")
 	public int getId() {
 		return id;
 	}

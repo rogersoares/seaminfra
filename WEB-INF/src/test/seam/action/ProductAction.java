@@ -47,15 +47,19 @@ public class ProductAction {
 
 	public String save() {
 		try {
+			boolean isValidationOk = true;
 			if ("belonga".equals(product.getName())) {
 				facesMessages.addFromResourceBundle("global.error", "You can't belonga me.");
-				return null;
-			} else {
-				em.merge(product);
-				em.flush();
+				isValidationOk = false;
 			}
 
-			return "/private/productList.xhtml";
+			if (isValidationOk) {
+				em.clear();
+				em.merge(product);
+				em.flush();
+
+				return "/private/productList.xhtml";
+			}
 		} catch (Exception e) {
 			log.error(e, e);
 			facesMessages.addFromResourceBundle(Severity.ERROR, "global.error", e);
