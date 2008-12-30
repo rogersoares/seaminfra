@@ -17,6 +17,8 @@
 	<web:exception-filter url-pattern="*.seam"/>
 	<web:redirect-filter url-pattern="*.seam"/>
 
+	<core:init debug="true"/>
+
 	<transaction:entity-transaction entity-manager="#{em}"/>
 	<persistence:entity-manager-factory name="testDatabase"/>
 	<persistence:managed-persistence-context name="em" auto-create="true"
